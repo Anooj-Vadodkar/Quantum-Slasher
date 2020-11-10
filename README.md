@@ -1,2 +1,2 @@
 # Quantum-Slasher
-My final project for Intro to Object Oriented Programming!
+My game project for Intro to Object Oriented Programming: Quantum Slasher

@@ -6,7 +6,7 @@
 #include "Rect.h"
 #include "Circle.h"
 #include "TexRect.h"
-
+#include "Hitbox.h"
 class App: public GlutApp {
 
 std::vector<Shape*> shapes;
@@ -18,7 +18,7 @@ public:
     void draw() const;
     
     void keyDown(unsigned char key, float x, float y);
-    
+    void leftMouseDown(float, float);
     ~App();
 };
 

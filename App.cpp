@@ -10,7 +10,7 @@ App::App(int argc, char** argv, int width, int height, const char* title): GlutA
     //shapes.push_back(new Level("Assets/LevelAssets/level1bg.png", 10, 10));
     //shapes.push_back(new Rect());
     //shapes.push_back(new Hitbox(-0.5, -0.5, 0.2, 0.2));
-    shapes.push_back(new Circle());
+    //shapes.push_back(new Circle());
     //level = new Level("Assets/LevelAssets/level1bg.png", 8, 8);
     Sprite* idleSprite = new Sprite("Assets/EnemyAssets/knightIdle.png", 1, 11, (-0.2-(0.8/2)), (-0.3+(0.8/2)), 0.8, 0.8);
     Sprite* attackSprite = new Sprite("Assets/EnemyAssets/knightAttack.png", 1, 11, (-0.2 - (0.8/2)), (-0.3 + (0.8/2)), 0.8, 0.8);
@@ -59,7 +59,6 @@ void App::keyDown(unsigned char key, float x, float y){
     if(key == 'd'){
         knight->move(-0.05, 0);
     }
-    std::cout << knights[0]->getX() << " " << knights[0]->getY() << std::endl;
     
     if (key == 27){
         exit(0);

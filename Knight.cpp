@@ -20,7 +20,7 @@ void Knight::moveToPlayer(float x, float y){
         if(this->x >= x-0.1 && this->x + this->y == y){
             std::cout << "Target: Hit. Commencing fire.";
         }
-        move((totalDistance * sin((ydist/totalDistance)))/500, (totalDistance * cos((xdist/totalDistance)))/500);
+        move((totalDistance * sin((ydist/totalDistance)))/250, (totalDistance * cos((xdist/totalDistance)))/250);
     }
 }
 void Knight::move(float deltax, float deltay){

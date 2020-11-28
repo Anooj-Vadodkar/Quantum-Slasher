@@ -46,17 +46,18 @@ void App::leftMouseDown(float x, float y){
     */
 }
 void App::keyDown(unsigned char key, float x, float y){
+    Knight* knight = (Knight*) knights[0];
     if(key == 'w'){
-        knights[0]->move(0, -0.1);
+        knight->move(0, -0.05);
     }
     if(key == 'a'){
-        knights[0]->move(0.1, 0);
+        knight->move(0.05, 0);
     }
     if(key == 's'){
-        knights[0]->move(0, 0.1);
+        knight->move(0, 0.05);
     }
     if(key == 'd'){
-        knights[0]->move(-0.1, 0);
+        knight->move(-0.05, 0);
     }
     std::cout << knights[0]->getX() << " " << knights[0]->getY() << std::endl;
     

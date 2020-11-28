@@ -1,7 +1,7 @@
 #include "TexRect.h"
 #include <iostream>
 
-TexRect::TexRect(const char* filename, float x=0, float y=0, float w=0.5, float h=0.5): Rect(x, y, w, h, 1.0f, 1.0f, 1.0f){
+TexRect::TexRect(const char* filename, float x=-1, float y=1, float w=0.5, float h=0.5): Rect(x, y, w, h, 1.0f, 1.0f, 1.0f){
 
     std::cout << "Loading " << filename << std::endl;
     

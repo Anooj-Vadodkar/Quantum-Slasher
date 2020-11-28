@@ -3,10 +3,10 @@
 
 Hitbox::Hitbox(float x, float y, float w, float h){
     // The hitbox is, by nature, something the player shouldn't be able to see. At most. I'll be using it for bug detection, which is why I want to be able to draw it.
-    this->x = x;
-    this->y = y;
     this->w = w;
     this->h = h;
+    this->x = x-(w/2);
+    this->y = y+(h/2);
     this->a = 0.5;
 }
 
@@ -15,7 +15,7 @@ void Hitbox::move(float deltaX, float deltaY){
     this->y += deltaY;
 }
 void Hitbox::draw(float z) const{
-    glColor4f(0, 0, 0, a);
+    glColor4f(1, 1, 1, a);
 
 	glBegin(GL_POLYGON);
 

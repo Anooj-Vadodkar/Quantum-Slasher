@@ -13,19 +13,23 @@ class Enemy{
         int frame = 0;
         float w;
         float h;
+        float spritew;
+        float spriteh;
         float speed;
         float x;
         float y;
     public:
-        Enemy(Sprite* idleSprite, Sprite* runSprite, Sprite* attackSprite, Hitbox* newHitbox, float x, float y, float w, float h){
+        Enemy(Sprite* idleSprite, Sprite* runSprite, Sprite* attackSprite, Hitbox* newHitbox, float x, float y, float w, float h, int spritew, int spriteh){
             this->idleSprite = idleSprite;
             this->runSprite = runSprite;
             this->attackSprite = attackSprite;
             hitbox = newHitbox;
-            this->x = x;
-            this->y = y;
             this->w = w;
             this->h = h;
+            this->x = x+(w/2);
+            this->y = y-(h/2);
+            this->spritew = spritew;
+            this->spriteh = spriteh;
             this->speed = speed;
         }
         void draw(){
@@ -62,12 +66,11 @@ class Enemy{
                     attackSprite->draw(0.5);
                     break;
             }
+            hitbox->draw(0);
         }
-        float getX();
-        float getY();
-        void moveToPlayer(){
-            move(0-x, 0-y);
-        }
+        float getX(){return x;};
+        float getY(){return y;};
+        void moveToPlayer();
         void move(float deltax, float deltay){
             x += deltax;
             y += deltay;

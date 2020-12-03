@@ -53,6 +53,7 @@ class Enemy{
                     if(frame%2 == 0){
                         runSprite->advance();
                     }
+                    //if(speed )
                     runSprite->draw(0.5);
                     break;
                 case 2: 
@@ -66,14 +67,18 @@ class Enemy{
                     attackSprite->draw(0.5);
                     break;
             }
-            hitbox->draw(0);
+            //hitbox->draw(0);
         }
         float getX(){return x;};
         float getY(){return y;};
+        Hitbox* getHitbox(){return hitbox;};
         void moveToPlayer();
         void move(float deltax, float deltay){
             x += deltax;
             y += deltay;
+        }
+        ~Enemy(){
+            delete this;
         }
 };
 #endif

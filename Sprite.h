@@ -17,13 +17,14 @@ class Sprite: public TexRect{
 	float top;
 	float bottom;
 
+	bool isRight;
 	bool done;
 
 public:
 	Sprite(const char* filename, int rows, int cols, float x, float y, float w, float h): TexRect(filename, x, y, w, h){
 		this->rows = rows;
 		this->cols = cols;
-
+		//this->isRight = isRight;
 		xinc = 1.0 / cols;
 		yinc = 1.0 / rows;
 
@@ -38,7 +39,12 @@ public:
 		done = false;
 
 	}
-
+	void flip(){
+		float temp = left;
+		left = right;
+		right = temp;
+		//isRight = !isRight;
+	}
 	void draw(float z = 0){
 		glBindTexture( GL_TEXTURE_2D, texture_id );
 		glEnable(GL_TEXTURE_2D);

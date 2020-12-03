@@ -4,18 +4,11 @@
 static App* singleton;
 
 App::App(int argc, char** argv, int width, int height, const char* title): GlutApp(argc, argv, width, height, title){
-
-    // Pushing different kinds of Shape in the collection
-    
-    //shapes.push_back(new Level("Assets/LevelAssets/level1bg.png", 10, 10));
-    //shapes.push_back(new Rect());
-    //shapes.push_back(new Hitbox(-0.5, -0.5, 0.2, 0.2));
-    //shapes.push_back(new Circle());
-    //level = new Level("Assets/LevelAssets/level1bg.png", 8, 8);
     Sprite* idleSprite = new Sprite("Assets/EnemyAssets/knightIdle.png", 1, 11, (-0.2-(0.8/2)), (-0.3+(0.8/2)), 0.8, 0.8);
     Sprite* attackSprite = new Sprite("Assets/EnemyAssets/knightAttack.png", 1, 11, (-0.2 - (0.8/2)), (-0.3 + (0.8/2)), 0.8, 0.8);
     Sprite* runSprite = new Sprite("Assets/EnemyAssets/knightRun.png", 1, 11, (-0.2 - (0.8/2)), (-0.1 + (0.8/2)), 0.8, 0.8);
     knights.push_back(new Knight(idleSprite, runSprite, attackSprite, new Hitbox(-0.2, -0.3, 0.2, 0.2), -0.2, -0.3, 0.2, 0.2, 0.8f, 0.8f));
+    player = new Player(0.2, 0.2, 0.6, 0.6);
 } 
 
 void App::draw() const {
@@ -28,22 +21,13 @@ void App::draw() const {
     }
     Knight* knight = (Knight*) knights[0];
     knight->moveToPlayer(0, 0);
-    //Hitbox* box = (Hitbox*) shapes[1];
-    //level->draw();
-    //box->move(0.001, 0.001);
+    player->draw();
     singleton->redraw();
 }
 
 void App::leftMouseDown(float x, float y){
     std::cout << "X: " << x << " Y: " << y << std::endl;
-    /*
-    Hitbox* box = (Hitbox*) shapes[1];
-    
-    std::cout << "Hitbox Area: " << box->getX() << " " << (box->getX() + box->getW()) << " " << box->getY()  << " " << (box->getY() - box->getH()) << std::endl;
-    if(box->contains(x, y)){
-        std::cout << "Ouch" << std::endl;
-    }
-    */
+
 }
 void App::keyDown(unsigned char key, float x, float y){
     Knight* knight = (Knight*) knights[0];
@@ -59,7 +43,17 @@ void App::keyDown(unsigned char key, float x, float y){
     if(key == 'd'){
         knight->move(-0.05, 0);
     }
-    
+    if(key == ' '){
+        std::vector<Enemy*> enemiesNear;
+        for(int i = 0; (int) i < knights.size(); i++){
+            // Check whether there are any knights inside of the attack. 
+            if(knights[i]->getX() >= 0.25 && knights[i]->getX() < 0.6 && knights[i]->getY() >= -0.2 && knights[i]->getY() < 0.2){
+                knights.erase(knights.begin() + i);
+                std::cout << "Uh Oh Stinky" << std::endl;
+            }
+        }
+        player->attack();
+    }
     if (key == 27){
         exit(0);
     }

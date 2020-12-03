@@ -10,9 +10,11 @@
 #include "Level.h"
 #include "Enemy.h"
 #include "Knight.h"
+#include "Player.h"
 class App: public GlutApp {
 
 std::vector<Shape*> shapes;
+Player* player;
 Level* level;
 std::vector<Enemy*> knights;
 public:

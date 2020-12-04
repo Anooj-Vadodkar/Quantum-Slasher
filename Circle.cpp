@@ -2,9 +2,9 @@
 #include "GlutApp.h"
 #include <cmath>
 
-Circle::Circle(){
-	x = -0.2;
-	y = -0.3;
+Circle::Circle(float x, float y){
+	this->x = x;
+	this->y = y;
 	radius = 0.05;
 	r = 0.0;
 	g = 0.0;

@@ -70,10 +70,13 @@ class Enemy{
         float getX(){return x;};
         float getY(){return y;};
         //Hitbox* getHitbox(){return hitbox;};
-        void moveToPlayer();
+        virtual void moveToPlayer(float x, float y){};
         void move(float deltax, float deltay){
             x += deltax;
             y += deltay;
+            idleSprite->move(deltax, deltay);
+            runSprite->move(deltax, deltay);
+            hitbox->move(deltax, deltay);
         }
         ~Enemy(){
             x = 1000;

@@ -12,14 +12,6 @@ void Knight::moveToPlayer(float x, float y){
         float totalDistance = sqrt((xdist*xdist) + (ydist*ydist));
         float normalizedVectorX = xdist/totalDistance;
         float normalizedVectorY = ydist/totalDistance;
-        std::cout << this->x << " " << this->y << std::endl;
         move(normalizedVectorX*speed, normalizedVectorY*speed);
     }
-}
-void Knight::move(float deltax, float deltay){
-    x += deltax;
-    y += deltay;
-    idleSprite->move(deltax, deltay);
-    runSprite->move(deltax, deltay);
-    hitbox->move(deltax, deltay);
 }

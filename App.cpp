@@ -4,10 +4,9 @@
 static App* singleton;
 
 App::App(int argc, char** argv, int width, int height, const char* title): GlutApp(argc, argv, width, height, title){
-    Sprite* idleSprite = new Sprite("Assets/EnemyAssets/knightIdle.png", 1, 11, (-0.2-(0.8/2)), (-0.3+(0.8/2)), 0.8, 0.8);
-    Sprite* attackSprite = new Sprite("Assets/EnemyAssets/knightAttack.png", 1, 11, (-0.2 - (0.8/2)), (-0.3 + (0.8/2)), 0.8, 0.8);
-    Sprite* runSprite = new Sprite("Assets/EnemyAssets/knightRun.png", 1, 11, (-0.2 - (0.8/2)), (-0.1 + (0.8/2)), 0.8, 0.8);
-    knights.push_back(new Knight(idleSprite, runSprite, attackSprite, new Hitbox(-0.2, -0.3, 0.2, 0.2), -0.2, -0.3, 0.2, 0.2, 0.8f, 0.8f));
+    Sprite* idleSprite = new Sprite("Assets/EnemyAssets/merchantidle.png", 1, 4, -0.4, 0, 0.5, 0.5);
+    Sprite* runSprite = new Sprite("Assets/EnemyAssets/merchantwalk.png", 1, 5, -0.4, 0, 0.5, 0.5);
+    knights.push_back(new Knight(idleSprite, runSprite, new Hitbox(-0.2, -0.3, 0.2, 0.2), -0.2, -0.3, 0.2, 0.2, 0.8f, 0.8f));
     player = new Player(0.2, 0.2, 0.6, 0.6);
 } 
 

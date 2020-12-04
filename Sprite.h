@@ -1,7 +1,6 @@
 #pragma once
 
 #include "TexRect.h"
-
 class Sprite: public TexRect{
 	int rows;
 	int cols;
@@ -17,14 +16,12 @@ class Sprite: public TexRect{
 	float top;
 	float bottom;
 
-	bool isRight;
 	bool done;
-
+	bool flipped;
 public:
 	Sprite(const char* filename, int rows, int cols, float x, float y, float w, float h): TexRect(filename, x, y, w, h){
 		this->rows = rows;
 		this->cols = cols;
-		//this->isRight = isRight;
 		xinc = 1.0 / cols;
 		yinc = 1.0 / rows;
 
@@ -37,13 +34,13 @@ public:
 		bottom = 1 - yinc * curr_row;
 
 		done = false;
-
+		flipped = x < -0.11;
 	}
 	void flip(){
 		float temp = left;
 		left = right;
 		right = temp;
-		//isRight = !isRight;
+		flipped = !flipped;
 	}
 	void draw(float z = 0){
 		glBindTexture( GL_TEXTURE_2D, texture_id );
@@ -98,8 +95,13 @@ public:
 				}
 				
 			}
-			left = xinc * (curr_col - 1);
-			right = xinc * curr_col;
+			if(flipped){
+				left = xinc * curr_col;
+				right = xinc * (curr_col - 1);
+			}else {
+				left = xinc * (curr_col - 1);
+				right = xinc * curr_col;
+			}
 			top = 1 - yinc * (curr_row - 1);
 			bottom = 1 - yinc * curr_row;
 

@@ -2,14 +2,12 @@
 #define ENEMY_H
 
 #include "Sprite.h"
-#include "Hitbox.h"
 #include<iostream>
 class Enemy{
     protected:
         int state = 0;
         Sprite* idleSprite;
         Sprite* runSprite;
-        Hitbox* hitbox;
         bool isRight;
         int frame = 0;
         float w;
@@ -20,10 +18,9 @@ class Enemy{
         float x;
         float y;
     public:
-        Enemy(Sprite* idleSprite, Sprite* runSprite, Hitbox* newHitbox, float x, float y, float w, float h, int spritew, int spriteh, float speed){
+        Enemy(Sprite* idleSprite, Sprite* runSprite, float x, float y, float w, float h, int spritew, int spriteh, float speed){
             this->idleSprite = idleSprite;
             this->runSprite = runSprite;
-            hitbox = newHitbox;
             this->w = w;
             this->h = h;
             this->x = x+(w/2);
@@ -65,7 +62,6 @@ class Enemy{
                 //if(speed )
                 runSprite->draw(0.5);
             }
-            hitbox->draw(0);
         }
         float getX(){return x;};
         float getY(){return y;};
@@ -76,7 +72,6 @@ class Enemy{
             y += deltay;
             idleSprite->move(deltax, deltay);
             runSprite->move(deltax, deltay);
-            hitbox->move(deltax, deltay);
         }
         ~Enemy(){
             x = 1000;

@@ -6,7 +6,6 @@
 #include "Rect.h"
 #include "Circle.h"
 #include "TexRect.h"
-#include "Hitbox.h"
 #include "Level.h"
 #include "Enemy.h"
 #include "Knight.h"
@@ -25,6 +24,7 @@ public:
     void draw();
     
     void keyDown(unsigned char key, float x, float y);
+    void keyUp(unsigned char key, float x, float y);
     void leftMouseDown(float, float);
     ~App();
 };

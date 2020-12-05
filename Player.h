@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include "Sprite.h"
-#include "Hitbox.h"
 #include <vector>
 class Player{
     int state = 0;
@@ -10,8 +9,7 @@ class Player{
     Sprite* runSprite;
     Sprite* attackSprite;
     Sprite* healthIndicator;
-    Hitbox* hitbox;
-    Hitbox* attackHitbox;
+    bool isRight = true;
     const int MAX_HEALTH = 3;
     int health;
     int frame = 0;
@@ -26,6 +24,11 @@ class Player{
         Player(float w, float h, int spritew, int spriteh);
         void draw();
         void attack();
+        bool playerRight();
+        void flip();
+        void move();
+        void setState(int);
+        int getState();
 };
 
 #endif

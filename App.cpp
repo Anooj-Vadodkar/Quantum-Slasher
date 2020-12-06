@@ -4,16 +4,18 @@
 static App* singleton;
 
 App::App(int argc, char** argv, int width, int height, const char* title): GlutApp(argc, argv, width, height, title){
+    level = new Level(1);
     Sprite* idleSprite = new Sprite("Assets/EnemyAssets/merchantidle.png", 1, 4, -0.4, 0, 0.5, 0.5);
     Sprite* runSprite = new Sprite("Assets/EnemyAssets/merchantwalk.png", 1, 5, -0.4, 0, 0.5, 0.5);
     enemies.push_back(new Knight(idleSprite, runSprite, -0.2, -0.3, 0.2, 0.2, 0.8f, 0.8f));
     idleSprite = new Sprite("Assets/EnemyAssets/droneidle.png", 1, 1, -0.5, 0.6, 0.6, 0.4);
-    runSprite = new Sprite("Assets/EnemyAssets/dronewalk.png", 6, 1, -0.5, 0.6, 0.6, 0.4);
+    runSprite = new Sprite("Assets/EnemyAssets/dronewalk.png", 6, 1, -0.5, 0.6, 0.8, 0.4);
     enemies.push_back(new Drone(idleSprite, runSprite, -0.2, 0.3,  0.2, 0.2, 0.6, 0.4));
     player = new Player(0.2, 0.2, 0.6, 0.6);
 } 
 
 void App::draw() {
+    level->draw();
     for(int i = 0; (int) i < enemies.size(); i++){
         enemies[i]->draw();
         enemies[i]->moveToPlayer(0, 0);
@@ -34,6 +36,7 @@ void App::keyDown(unsigned char key, float x, float y){
         for(auto i = enemies.begin(); i != enemies.end(); i++){
             (*i)->move(0, -0.05);
         }
+        level->move(0, -0.05);
         if(player->getState() != 2){
             player->setState(2);
         }
@@ -42,6 +45,7 @@ void App::keyDown(unsigned char key, float x, float y){
         for(auto i = enemies.begin(); i != enemies.end(); i++){
             (*i)->move(0.05, 0);
         }
+        level->move(0.05, 0);
         if(player->playerRight()){
             player->flip();
         }
@@ -53,6 +57,7 @@ void App::keyDown(unsigned char key, float x, float y){
         for(auto i = enemies.begin(); i != enemies.end(); i++){
             (*i)->move(0, 0.05);
         }
+        level->move(0, 0.05);
         if(player->getState() != 2){
             player->setState(2);
         }
@@ -61,6 +66,7 @@ void App::keyDown(unsigned char key, float x, float y){
         for(auto i = enemies.begin(); i != enemies.end(); i++){
             (*i)->move(-0.05, 0);
         }
+        level->move(-0.05, 0);
         if(player->getState() != 2){
             player->setState(2);
         }

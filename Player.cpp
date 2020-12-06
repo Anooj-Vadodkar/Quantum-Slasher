@@ -45,7 +45,6 @@ void Player::draw(){
                 frame = 0;
             }
             if(frame%3 == 0){
-                std::cout << frame << std::endl;
                 runSprite->advance();
             }
             runSprite->draw(0.5);

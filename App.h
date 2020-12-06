@@ -14,6 +14,7 @@
 class App: public GlutApp {
 
 std::vector<Shape*> shapes;
+int currentLevel;
 Player* player;
 Level* level;
 std::vector<Enemy*> enemies;

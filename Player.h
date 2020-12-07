@@ -8,7 +8,7 @@ class Player{
     Sprite* idleSprite;
     Sprite* runSprite;
     Sprite* attackSprite;
-    Sprite* healthIndicator;
+    std::vector<Sprite*> healthIndicator;
     bool isRight = true;
     const int MAX_HEALTH = 3;
     int health;
@@ -29,6 +29,8 @@ class Player{
         void move();
         void setState(int);
         int getState();
+        bool damage();
+        void addHealth();
 };
 
 #endif

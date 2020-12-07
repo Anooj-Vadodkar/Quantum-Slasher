@@ -5,7 +5,9 @@ Player::Player(float w, float h, int spritew, int spriteh){
     idleSprite = new Sprite("Assets/HeroAssets/playeridle.png", 1, 4, -0.1, 0.3, 0.5, 0.3);
     attackSprite = new Sprite("Assets/HeroAssets/playerattack.png", 1, 6, -0.1, 0.3, 0.5, 0.3);
     runSprite = new Sprite("Assets/HeroAssets/playerrun.png", 1, 6, -0.1, 0.3, 0.5, 0.3);
-    healthIndicator = new Sprite("Assets/LevelAssets/hearts.png", 1, 6, -0.7, 0.7, 0.4, 0.3);
+    healthIndicator.push_back(new Sprite("Assets/LevelAssets/hearts.png", 1, 1, -1.3, 0.95, 0.25, 0.1875));
+    healthIndicator.push_back(new Sprite("Assets/LevelAssets/hearts.png", 1, 1, -1.05, 0.95, 0.25, 0.1875));
+    healthIndicator.push_back(new Sprite("Assets/LevelAssets/hearts.png", 1, 1, -0.8, 0.95, 0.25, 0.1875));
     this->w = w;
     this->h = h;
     this->spritew = spritew;
@@ -17,6 +19,9 @@ Player::Player(float w, float h, int spritew, int spriteh){
 
 void Player::draw(){
     frame++;
+    for(auto i = healthIndicator.begin(); i != healthIndicator.end(); i++){
+        (*i)->draw();
+    }
     switch(state){
         case 0:
             if(frame == 20){
@@ -74,4 +79,16 @@ void Player::flip(){
 }
 int Player::getState(){
     return state;
+}
+bool Player::damage(){
+    health--;
+    healthIndicator.pop_back();
+    return health == 0;
+}
+void Player::addHealth(){
+    if(health < MAX_HEALTH){
+        std::cout << health << std::endl;
+        health++;
+        healthIndicator.push_back(new Sprite("Assets/LevelAssets/hearts.png", 1, 1, -1.3 + (0.25 * (health-1)), 0.95, 0.25, 0.1875));
+    }
 }

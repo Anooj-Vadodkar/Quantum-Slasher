@@ -23,6 +23,10 @@ void App::draw() {
             enemies.erase(enemies.begin() + i);
         }
     }
+    std::cout << level->getPortalX() << " " << level->getPortalY() << std::endl;
+    if(level->getPortalX() >= 0 && level->getPortalX() < 0.3 && level->getPortalY() < 0.2 && level->getPortalY() > -0.15){
+        std::cout << "You win!" << std::endl;
+    } 
     player->draw();
     singleton->redraw();
 }

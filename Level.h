@@ -18,10 +18,11 @@ class Level{
             x = -4;
             y = 4;
             frame = 0;
-            levelOne = new Sprite("Assets/LevelAssets/level1bg.png", 1, 1, x, y, 8, 8);
+            levelOne = new Sprite("Assets/LevelAssets/level1bg.png", 2, 2, x, y, 8, 8);
             srand(time(NULL));
-            portalX = 0.5;
-            portalY = -0.5;
+            portalX = (rand()%40+1)/10;
+            portalY = (rand()%40+1)/10;
+            std::cout << portalX << " " << portalY << std::endl;
             portal = new Sprite("Assets/LevelAssets/portal.png", 1, 8, portalX-0.25, portalY+0.3, 0.5, 0.5);
             std::cout << "portalX " << portalX << " portalY " << portalX; 
         }

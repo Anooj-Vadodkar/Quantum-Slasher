@@ -15,7 +15,7 @@
 class App: public GlutApp {
 
 std::vector<Shape*> shapes;
-int currentLevel;
+int currentLevel = 1;
 Player* player;
 Level* level;
 std::vector<Enemy*> enemies;
@@ -28,6 +28,8 @@ public:
     void keyDown(unsigned char key, float x, float y);
     void keyUp(unsigned char key, float x, float y);
     void leftMouseDown(float, float);
+
+    void incrementLevel();
     ~App();
 };
 

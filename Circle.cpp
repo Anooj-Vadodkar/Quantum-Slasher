@@ -25,3 +25,8 @@ void Circle::draw(float z) const {
 
     glEnd();
 }
+
+void Circle::move(float deltax, float deltay){
+    x += deltax;
+    y += deltay;
+}

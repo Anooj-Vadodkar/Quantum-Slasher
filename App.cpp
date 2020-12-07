@@ -7,10 +7,14 @@ App::App(int argc, char** argv, int width, int height, const char* title): GlutA
     level = new Level(1);
     Sprite* idleSprite = new Sprite("Assets/EnemyAssets/merchantidle.png", 1, 4, -0.4, 0, 0.5, 0.5);
     Sprite* runSprite = new Sprite("Assets/EnemyAssets/merchantwalk.png", 1, 5, -0.4, 0, 0.5, 0.5);
-    enemies.push_back(new Knight(idleSprite, runSprite, -0.2, -0.3, 0.2, 0.2, 0.8f, 0.8f));
+    enemies.push_back(new Merchant(idleSprite, runSprite, -0.2, -0.3, 0.2, 0.2, 0.8f, 0.8f));
     idleSprite = new Sprite("Assets/EnemyAssets/droneidle.png", 1, 1, -0.5, 0.6, 0.6, 0.4);
     runSprite = new Sprite("Assets/EnemyAssets/dronewalk.png", 6, 1, -0.5, 0.6, 0.8, 0.4);
     enemies.push_back(new Drone(idleSprite, runSprite, -0.2, 0.3,  0.2, 0.2, 0.6, 0.4));
+    idleSprite = new Sprite("Assets/EnemyAssets/stormheadidle.png", 9, 1, 0, 0.6, 0.6, 0.4);
+    runSprite = new Sprite("Assets/EnemyAssets/stormheadrun.png", 10, 1, 0.15, 1.25, 0.8, 0.8);
+    enemies.push_back(new Stormhead(idleSprite, runSprite, 0.6, 0.5, 0.2, 0.2, 1, 1));
+    std::cout << enemies.size() << std::endl;
     player = new Player(0.2, 0.2, 0.6, 0.6);
 } 
 
@@ -81,7 +85,9 @@ void App::keyDown(unsigned char key, float x, float y){
     }
     if(key == ' '){
         for(int i = 0; (int) i < enemies.size(); i++){
-            // Check whether there are any enemies inside of the attack. 
+            // Check whether there are any enemies inside of the attack. The first one is for enemies that are
+            // to the right of the player (done when the player is facing the right), and the second one is done
+            // for enemies that are on the left of the player (player is facing left)
             if(player->playerRight()){
                 if(enemies[i]->getX() >= 0.25 && enemies[i]->getX() < 0.6 && enemies[i]->getY() >= -0.2 && enemies[i]->getY() < 0.2){
                     enemies.erase(enemies.begin() + i);

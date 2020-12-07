@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include "Sprite.h"
+#include "Circle.h"
 #include<iostream>
 class Enemy{
     protected:
@@ -15,6 +16,7 @@ class Enemy{
         float spritew;
         float spriteh;
         float speed;
+        Circle* circle;
         float x;
         float y;
     public:
@@ -29,10 +31,11 @@ class Enemy{
             this->spriteh = spriteh;
             this->speed = speed;
             isRight = x > 0;
-            
+            circle = new Circle(x, y);
         }
         void draw(){
             frame++;
+            circle->draw();
             if(x > -0.9 && x < 0.9 && y < 0.9 && y > 0.9){
                 if(frame == 8){
                     idleSprite->reset();
@@ -44,11 +47,9 @@ class Enemy{
                 idleSprite->draw(0.5);
             } else {
                 if(x < 0 && !isRight){
-                    std::cout << "Flipped ";
                     isRight = true;
                     runSprite->flip();
                 } else if(x > 0 && isRight){
-                    std::cout << "Flipped ";
                     isRight = false;
                     runSprite->flip();
                 }
@@ -70,6 +71,7 @@ class Enemy{
         void move(float deltax, float deltay){
             x += deltax;
             y += deltay;
+            circle->move(deltax, deltay);
             idleSprite->move(deltax, deltay);
             runSprite->move(deltax, deltay);
         }

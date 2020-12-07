@@ -8,9 +8,10 @@
 #include "TexRect.h"
 #include "Level.h"
 #include "Enemy.h"
-#include "Knight.h"
+#include "Merchant.h"
 #include "Drone.h"
 #include "Player.h"
+#include "Stormhead.h"
 class App: public GlutApp {
 
 std::vector<Shape*> shapes;

@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Knight.h"
+#include "Merchant.h"
 #include <cmath>
 
-void Knight::moveToPlayer(float x, float y){
+void Merchant::moveToPlayer(float x, float y){
     // This is the basic function that defines how the knight class enemy interacts with the player;
     // If they can see the player, they move towards them. The knight class is basic
     if(this->x >= -1 && this->x <= 1 && this->y >= -1 && this->y <= 1){

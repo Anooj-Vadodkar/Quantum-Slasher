@@ -17,6 +17,7 @@ public:
 	Circle(float x, float y);
 
 	void draw(float z = 0) const;
+	void move(float, float);
 };
 
 

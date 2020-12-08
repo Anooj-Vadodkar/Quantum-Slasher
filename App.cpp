@@ -68,8 +68,8 @@ void App::incrementLevel(){
         for(int i = 0; i < 10; i++){
             droneX = (rand()%40+1)/10;
             droneY = (rand()%40+1)/10;
-            Sprite* idleSprite = new Sprite("Assets/EnemyAssets/droneidle.png", 1, 1, droneX-0.45, droneY+0.4, 0.6, 0.4);
-            Sprite* runSprite = new Sprite("Assets/EnemyAssets/dronewalk.png",  6, 1, droneX-0.45, droneY+0.4, 0.8, 0.4);
+            Sprite* idleSprite = new Sprite("Assets/EnemyAssets/droneidle.png", 1, 1, droneX-0.4, droneY+0.35, 0.6, 0.4);
+            Sprite* runSprite = new Sprite("Assets/EnemyAssets/dronewalk.png",  6, 1, droneX-0.4, droneY+0.35, 0.8, 0.4);
             enemies.push_back(new Drone(idleSprite, runSprite, droneX, droneY, 0.2, 0.2, 0.8f, 0.8f));
         }
     } else if(currentLevel == 2){

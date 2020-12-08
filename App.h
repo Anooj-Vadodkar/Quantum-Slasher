@@ -7,6 +7,7 @@
 #include "Circle.h"
 #include "TexRect.h"
 #include "Level.h"
+#include "NonLevelScreen.h"
 #include "Enemy.h"
 #include "Merchant.h"
 #include "Drone.h"
@@ -15,9 +16,10 @@
 class App: public GlutApp {
 
 std::vector<Shape*> shapes;
-int currentLevel = 2;
+int currentLevel = 0;
 Player* player;
 Level* level;
+NonLevelScreen* nonlevelscreens;
 std::vector<Enemy*> enemies;
 public:
     

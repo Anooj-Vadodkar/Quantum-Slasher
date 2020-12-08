@@ -6,35 +6,46 @@ static App* singleton;
 App::App(int argc, char** argv, int width, int height, const char* title): GlutApp(argc, argv, width, height, title){
     srand(time(NULL));
     player = new Player(0.2, 0.2, 0.6, 0.6);
+    nonlevelscreens = new NonLevelScreen(0);
     std::cout << currentLevel << std::endl;
 } 
 
 void App::draw() {
-    if(currentLevel == 0){
-
-    } else if(currentLevel == 4){
-
-    } else {
-        level->draw();
-        for(int i = 0; (int) i < enemies.size(); i++){
-            enemies[i]->draw();
-            enemies[i]->moveToPlayer(0.2, 0);
-            if(enemies[i]->getX() >= 0 && enemies[i]->getX() < 0.2 && enemies[i]->getY() >= -0.1 && enemies[i]->getY() < 0.1){
-                enemies.erase(enemies.begin() + i);
-                player->damage();
+    // What is drawn depends on the level. If the case is 0, the player is on the title screen. If the case is 4, the player is
+    // on the game over screen. If the case if 5, then the player is on the victory screen. Otherwise, the level is drawn.
+    switch(currentLevel){
+        case 0:
+        nonlevelscreens->draw();
+        break;
+        case 4:
+            break;
+        case 5:
+            break;
+        default:
+            level->draw();
+            for(int i = 0; (int) i < enemies.size(); i++){
+                enemies[i]->draw();
+                enemies[i]->moveToPlayer(0.2, 0);
+                if(enemies[i]->getX() >= 0.2 && enemies[i]->getX() < 0.4 && enemies[i]->getY() >= -0.1 && enemies[i]->getY() < 0.1){
+                    enemies.erase(enemies.begin() + i);
+                    if(player->damage()){
+                        enemies.clear();
+                        currentLevel = 4;
+                    }
+                }
             }
-        }
-        //std::cout << level->getX() << " " << level->getY() << std::endl;
-        if(level->getPortalX() >= 0 && level->getPortalX() < 0.3 && level->getPortalY() < 0.2 && level->getPortalY() > -0.15){
-            player->addHealth();
-            incrementLevel();
-        } 
-        player->draw();
+            //std::cout << level->getX() << " " << level->getY() << std::endl;
+            if(level->getPortalX() >= 0 && level->getPortalX() < 0.3 && level->getPortalY() < 0.2 && level->getPortalY() > -0.15){
+                player->addHealth();
+                incrementLevel();
+            } 
+            player->draw();
+            break;
     }
     singleton->redraw();
 }
 // Increments and spawns each of the levels. Enemies are added and created here, but the portal location and general level logic is
-// handled in Level.h
+// handled in Level.h. The enemy created depends on the level, and this is merely the creation of the level. 
 void App::incrementLevel(){
     currentLevel++;
     if(currentLevel == 0){
@@ -57,8 +68,8 @@ void App::incrementLevel(){
         for(int i = 0; i < 10; i++){
             droneX = (rand()%40+1)/10;
             droneY = (rand()%40+1)/10;
-            Sprite* idleSprite = new Sprite("Assets/EnemyAssets/droneidle.png", 1, 1, droneX-0.45, droneY+0.5, 0.6, 0.4);
-            Sprite* runSprite = new Sprite("Assets/EnemyAssets/dronewalk.png",  6, 1, droneX-0.45, droneY+0.5, 0.8, 0.4);
+            Sprite* idleSprite = new Sprite("Assets/EnemyAssets/droneidle.png", 1, 1, droneX-0.45, droneY+0.4, 0.6, 0.4);
+            Sprite* runSprite = new Sprite("Assets/EnemyAssets/dronewalk.png",  6, 1, droneX-0.45, droneY+0.4, 0.8, 0.4);
             enemies.push_back(new Drone(idleSprite, runSprite, droneX, droneY, 0.2, 0.2, 0.8f, 0.8f));
         }
     } else if(currentLevel == 2){
@@ -77,7 +88,10 @@ void App::incrementLevel(){
     }
 }
 void App::leftMouseDown(float x, float y){
-    std::cout << "X: " << x << " Y: " << y << std::endl;
+    if(nonlevelscreens->isActive()){
+        if(nonlevelscreens->contains(x, y))
+            incrementLevel();   
+    }
 
 }
 void App::keyDown(unsigned char key, float x, float y){
@@ -137,7 +151,7 @@ void App::keyDown(unsigned char key, float x, float y){
                         enemies.erase(enemies.begin() + i);
                     }
                 } else {
-                    if(enemies[i]->getX() >= -0.25 && enemies[i]->getX() < 0 && enemies[i]->getY() >= -0.2 && enemies[i]->getY() < 0.2){
+                    if(enemies[i]->getX() >= -0.25 && enemies[i]->getX() < 0.25 && enemies[i]->getY() >= -0.2 && enemies[i]->getY() < 0.2){
                         enemies[i]->move(10000, 10000);
                         enemies.erase(enemies.begin() + i);
                     }

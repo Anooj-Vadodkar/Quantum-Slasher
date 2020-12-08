@@ -14,6 +14,7 @@ class NonLevelScreen{
         bool contains(float, float); 
         void draw();
         bool isActive();
+        int getScreen();
 };
 
 #endif

@@ -24,7 +24,6 @@ class Level{
             portalY = (rand()%40+1)/10;
             std::cout << portalX << " " << portalY << std::endl;
             portal = new Sprite("Assets/LevelAssets/portal.png", 1, 8, portalX-0.25, portalY+0.3, 0.5, 0.5);
-            std::cout << "portalX " << portalX << " portalY " << portalX; 
         }
         void move(float deltax, float deltay){
             x += deltax;

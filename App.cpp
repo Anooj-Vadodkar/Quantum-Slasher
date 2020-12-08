@@ -2,7 +2,12 @@
 #include "App.h"
 #include <stdlib.h> 
 static App* singleton;
+// Welcome to my final project for CSE 165! Just a bit of a heads up, there's a good amount of loading times between levels.
+// If you're waiting for a while, it's just loading. I hope.
 
+// For the project, I made a game called Quantum Slasher, which is a top down hack and slash game where you try and get
+// to a randomly placed portal in the world while avoiding getting hit by enemies. Each enemy moves in a unique way,
+// detailed more clearly in 
 App::App(int argc, char** argv, int width, int height, const char* title): GlutApp(argc, argv, width, height, title){
     srand(time(NULL));
     player = new Player(0.2, 0.2, 0.6, 0.6);
@@ -15,11 +20,13 @@ void App::draw() {
     // on the game over screen. If the case if 5, then the player is on the victory screen. Otherwise, the level is drawn.
     switch(currentLevel){
         case 0:
-        nonlevelscreens->draw();
-        break;
+            nonlevelscreens->draw();
+            break;
         case 4:
+            nonlevelscreens->draw();
             break;
         case 5:
+            nonlevelscreens->draw();
             break;
         default:
             level->draw();
@@ -30,14 +37,21 @@ void App::draw() {
                     enemies.erase(enemies.begin() + i);
                     if(player->damage()){
                         enemies.clear();
+                        nonlevelscreens = new NonLevelScreen(1);
                         currentLevel = 4;
                     }
                 }
             }
             //std::cout << level->getX() << " " << level->getY() << std::endl;
             if(level->getPortalX() >= 0 && level->getPortalX() < 0.3 && level->getPortalY() < 0.2 && level->getPortalY() > -0.15){
-                player->addHealth();
-                incrementLevel();
+                if(currentLevel == 3){
+                    enemies.clear();
+                    nonlevelscreens = new NonLevelScreen(2);
+                    currentLevel = 5;
+                }else  {
+                    player->addHealth();
+                    incrementLevel();
+                }
             } 
             player->draw();
             break;
@@ -47,8 +61,10 @@ void App::draw() {
 // Increments and spawns each of the levels. Enemies are added and created here, but the portal location and general level logic is
 // handled in Level.h. The enemy created depends on the level, and this is merely the creation of the level. 
 void App::incrementLevel(){
-    currentLevel++;
     if(currentLevel == 0){
+        player->addHealth();
+        player->addHealth();
+        player->addHealth();
         level = new Level(1);
         float merchantX;
         float merchantY;
@@ -59,6 +75,7 @@ void App::incrementLevel(){
             Sprite* runSprite = new Sprite("Assets/EnemyAssets/merchantwalk.png", 1, 5, merchantX+(-0.3), merchantY-(-0.3), 0.5, 0.5);
             enemies.push_back(new Merchant(idleSprite, runSprite, merchantX, merchantY, 0.2, 0.2, 0.8f, 0.8f));
         } 
+        std::cout << "portalX " << level->getPortalX() << " portalY " << level->getPortalY(); 
     }
     else if(currentLevel == 1){
         enemies.clear();
@@ -79,18 +96,22 @@ void App::incrementLevel(){
         float stormheadY;
         for(int i = 0; i < 10; i++){
             stormheadX = (rand()%40+1)/10;
-            stormheadX = (rand()%40+1)/10;
+            stormheadY = (rand()%40+1)/10;
             Sprite* idleSprite = new Sprite("Assets/EnemyAssets/stormheadidle.png", 9, 1, stormheadX-0.45, stormheadY+0.7, 0.6, 0.4);
             Sprite* runSprite = new Sprite("Assets/EnemyAssets/stormheadrun.png",  10, 1, stormheadX-0.45, stormheadY+0.7, 0.8, 0.8);
             enemies.push_back(new Drone(idleSprite, runSprite, stormheadX, stormheadY, 0.2, 0.2, 1, 1));
         }
         
     }
+    currentLevel++;
 }
 void App::leftMouseDown(float x, float y){
+    
     if(nonlevelscreens->isActive()){
-        if(nonlevelscreens->contains(x, y))
-            incrementLevel();   
+        if(nonlevelscreens->contains(x, y)){
+            currentLevel = 0;
+            incrementLevel(); 
+        }
     }
 
 }
@@ -146,7 +167,7 @@ void App::keyDown(unsigned char key, float x, float y){
                 // to the right of the player (done when the player is facing the right), and the second one is done
                 // for enemies that are on the left of the player (player is facing left)
                 if(player->playerRight()){
-                    if(enemies[i]->getX() >= 0.25 && enemies[i]->getX() < 0.6 && enemies[i]->getY() >= -0.2 && enemies[i]->getY() < 0.2){
+                    if(enemies[i]->getX() >= 0.25 && enemies[i]->getX() < 0.75 && enemies[i]->getY() >= -0.2 && enemies[i]->getY() < 0.2){
                         enemies[i]->move(10000, 10000);
                         enemies.erase(enemies.begin() + i);
                     }

@@ -59,6 +59,7 @@
         "unordered_map": "cpp",
         "utility": "cpp",
         "*.tcc": "cpp",
-        "hashtable": "cpp"
+        "hashtable": "cpp",
+        "deque": "cpp"
     }
 }

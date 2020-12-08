@@ -31,6 +31,7 @@ class Player{
         int getState();
         bool damage();
         void addHealth();
+        int getHealth();
 };
 
 #endif

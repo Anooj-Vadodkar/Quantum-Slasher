@@ -92,3 +92,7 @@ void Player::addHealth(){
         healthIndicator.push_back(new Sprite("Assets/LevelAssets/hearts.png", 1, 1, -1.3 + (0.25 * (health-1)), 0.95, 0.25, 0.1875));
     }
 }
+
+int Player::getHealth(){
+    return health;
+}

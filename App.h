@@ -16,7 +16,7 @@
 class App: public GlutApp {
 
 std::vector<Shape*> shapes;
-int currentLevel = 0;
+int currentLevel = 4;
 Player* player;
 Level* level;
 NonLevelScreen* nonlevelscreens;

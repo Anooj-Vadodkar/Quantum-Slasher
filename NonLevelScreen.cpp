@@ -11,6 +11,7 @@ NonLevelScreen::NonLevelScreen(int screen){
             onScreenText.push_back(new Text("But you need to get back.", 26, -0.35, 0.25, 1, 1, 1));
             onScreenText.push_back(new Text("Find the portals, and flee this endless sea.", 45, -0.65, 0.05, 1, 1, 1));
             onScreenText.push_back(new Text("Move with the WASD keys, and use space to attack.", 50, -0.75, -0.15, 1, 1, 1));
+            onScreenText.push_back(new Text("Loading will take a few seconds, so don't worry!", 49, -0.7, -0.35, 1, 1, 1));
             button = new Rect(-0.19, -0.85, 0.5, 0.2, 1, 1, 1);
             onScreenText.push_back(new Text("Play", 4, 0, -0.95, 0, 0 ,0));
             break;

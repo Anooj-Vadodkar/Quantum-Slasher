@@ -66,7 +66,6 @@ class Enemy{
         }
         float getX(){return x;};
         float getY(){return y;};
-        //Hitbox* getHitbox(){return hitbox;};
         virtual void moveToPlayer(float x, float y){};
         void move(float deltax, float deltay){
             x += deltax;

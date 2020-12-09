@@ -15,13 +15,13 @@ class Level{
     public:
         Level(int level){
             this->level = level;
-            x = -4;
+            x = -4.5;
             y = 4;
             frame = 0;
-            levelOne = new Sprite("Assets/LevelAssets/level1bg.png", 2, 2, x, y, 8, 8);
+            levelOne = new Sprite("Assets/LevelAssets/levelbg.png", 1, 1, x, y, 9, 8);
             srand(time(NULL));
             portalX = (rand()%40+1)/10;
-            portalY = (rand()%40+1)/10;
+            portalY = (rand()%30+1)/10;
             std::cout << portalX << " " << portalY << std::endl;
             portal = new Sprite("Assets/LevelAssets/portal.png", 1, 8, portalX-0.25, portalY+0.3, 0.5, 0.5);
         }

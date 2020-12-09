@@ -6,7 +6,6 @@ void Merchant::moveToPlayer(float x, float y){
     // This is the basic function that defines how the knight class enemy interacts with the player;
     // If they can see the player, they move towards them. The knight class is basic
     if(this->x >= -1 && this->x <= 1 && this->y >= -1 && this->y <= 1){
-        //state = 1;
         float ydist = y-this->y;
         float xdist = x-this->x;
         float totalDistance = sqrt((xdist*xdist) + (ydist*ydist));

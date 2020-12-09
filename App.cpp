@@ -9,7 +9,7 @@ App::App(int argc, char** argv, int width, int height, const char* title): GlutA
 } 
 
 void App::draw(){
-    maingame->draw();
+    maingame->mainGameLoop();
     singleton->redraw();
 }
 

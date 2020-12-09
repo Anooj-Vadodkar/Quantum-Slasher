@@ -20,9 +20,11 @@ class Level{
             frame = 0;
             levelOne = new Sprite("Assets/LevelAssets/levelbg.png", 1, 1, x, y, 9, 8);
             srand(time(NULL));
-            portalX = (rand()%40+1)/10;
-            portalY = (rand()%30+1)/10;
-            std::cout << portalX << " " << portalY << std::endl;
+            // Essentially makes sure that the portal doesn't spawn on the player. 
+            do{
+                portalX = ((rand()%60+1)/10.0f) - 3.0;
+                portalY = ((rand()%60+1)/10.0f) - 3.0;
+            }while (portalX >= 0 && portalX <= 0.2 && portalY <= 0.1 && portalY >= -0.1);
             portal = new Sprite("Assets/LevelAssets/portal.png", 1, 8, portalX-0.25, portalY+0.3, 0.5, 0.5);
         }
         void move(float deltax, float deltay){

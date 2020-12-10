@@ -68,7 +68,9 @@ void Player::attack(){
     state = 1;
 }
 void Player::setState(int x){
-    frame = 0;
+    if(state != x){
+        frame = 0;
+    }
     state = x;
 }
 void Player::flip(){

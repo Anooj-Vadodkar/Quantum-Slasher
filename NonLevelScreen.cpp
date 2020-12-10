@@ -35,7 +35,9 @@ int NonLevelScreen::getScreen(){
     return currentScreen;
 }
 bool NonLevelScreen::contains(float x, float y){
-    active = false;
+    if(button->contains(x, y))
+        active = false;
+    
     return button->contains(x, y);
 }
 bool NonLevelScreen::isActive(){

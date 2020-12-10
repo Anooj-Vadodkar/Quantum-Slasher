@@ -3,7 +3,7 @@
 #include <math.h>
 
 void Stormhead::moveToPlayer(float x, float y){
-    if(this->x >= -1 && this->x <= 1 && this->y >= -1 && this->y <= 1){
+    if(this->x >= -1 && this->x <= 1.2 && this->y >= -1 && this->y <= 1){
         float ydist = y-this->y;
         float xdist = x-this->x;
         float totalDistance = sqrt((xdist*xdist) + (ydist*ydist));

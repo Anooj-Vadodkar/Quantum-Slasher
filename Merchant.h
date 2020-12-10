@@ -5,7 +5,7 @@
 class Merchant: public Enemy{
     public:
         Merchant(Sprite* idleSprite, Sprite* runSprite, float x, float y, float w, float h, float spritew, float spriteh): 
-        Enemy(idleSprite, runSprite, x, y, w, h, spritew, spriteh, 0.0008){};
+        Enemy(idleSprite, runSprite, x, y, w, h, spritew, spriteh, 0.001){};
         void moveToPlayer(float x, float y);
 };
 #endif

@@ -195,6 +195,6 @@ void Game::keyUp(unsigned char key, float x, float y){
                     }
                 }
             }
-            player->setState(1);
+            player->attack();
         }
 }

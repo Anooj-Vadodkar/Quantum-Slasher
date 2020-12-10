@@ -63,7 +63,6 @@ bool Player::playerRight(){
     return isRight;
 }
 void Player::attack(){
-    std::cout << "I cast fist" << std::endl;
     frame = 0;
     state = 1;
 }
@@ -89,7 +88,6 @@ bool Player::damage(){
 }
 void Player::addHealth(){
     if(health < MAX_HEALTH){
-        std::cout << health << std::endl;
         health++;
         healthIndicator.push_back(new Sprite("Assets/LevelAssets/hearts.png", 1, 1, -1.3 + (0.25 * (health-1)), 0.95, 0.25, 0.1875));
     }
